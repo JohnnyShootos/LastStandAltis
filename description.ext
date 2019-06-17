@@ -1,0 +1,205 @@
+// Sets info for mission specifics.
+class Header
+{
+	gameType = Coop;
+	minPlayers = 1;
+	maxPlayers = 25;
+};
+
+class Params
+{
+	class SpacerMain
+	{
+		title = "          === Mission Settings ===";
+		values[] = {0};
+		texts[] = {""};
+		default = 0;
+	};
+	class StartCash
+	{
+		title = "Starting Cash";
+		values[]= {0,1000,1500,2000,999999};
+		texts[] = {"None","1000","1500","2000","Debug"};
+		default = 2000;
+	};
+	class StartWave
+	{
+		title = "Start Wave";
+		values[] = {1,5,10,15,20};
+		texts[] = {"1","5","10","15","20"};
+		default = 1;
+	};
+	class TimeBetweenWave
+	{
+		title = "Time Between Waves in Seconds";
+		values[] = {30,45,60,90,120};
+		texts[] = {"30","45","60","90","120"};
+		default = 60;
+	};
+	class GameDifficulty
+	{
+		title = "Game Difficulty";
+		values[] = {1,2,3};
+		texts[] = {"Normal","Hard","Nightmare"};
+		default = 2;
+	};
+	class SpacerRevive
+	{
+		title = "          === Arma 3 Revive Settings ===";
+		values[] = {0};
+		texts[] = {""};
+		default = 0;
+	};
+	#include "\a3\Functions_F\Params\paramRevive.hpp"
+};
+
+// User Functions
+class CfgFunctions
+{
+	#include "functions\TFD.hpp"
+	#include "CHVD\CfgFunctions.hpp"
+	#include "adminpanelmk2\functions\APMK2.hpp"
+};
+
+//Sounds
+class CfgSounds
+{
+	sounds[] = {};
+	class hitmarker
+	{
+		// how the sound is referred to in the editor (e.g. trigger effects)
+		name = "cod_hitmarker";
+		// filename, volume, pitch
+		sound[] = {"media\hitsound.ogg", 1, 1};
+		// subtitle delay in seconds, subtitle text
+		titles[] = {0,""};
+	};
+	class headdink
+	{
+		// how the sound is referred to in the editor (e.g. trigger effects)
+		name = "headshot_dink";
+		// filename, volume, pitch
+		sound[] = {"media\headshotsound.ogg", 1, 1};
+		// subtitle delay in seconds, subtitle text
+		titles[] = {0,""};
+	};
+};
+
+
+//Hud
+class RscTitles
+{
+	#include "functions\gui\hud\hud.hpp"
+	class cod_hitmarker 
+	{
+		idd = -1;
+		fadein = 0;
+		fadeout = 0;
+		duration = 0.05;
+		enableSimulation = true;
+		class controls
+		{
+			class hitmarker
+			{
+				idc = 1200;
+				text = "media\hitmarker.paa";
+				x = 0.491186 * safezoneW + safezoneX;
+				y = 0.480596 * safezoneH + safezoneY;
+				w = 0.0176284 * safezoneW;
+				h = 0.0376157 * safezoneH;
+				colorText[] = {1,1,1,1};
+				colorBackground[] = {0,0,0,0};
+				colorActive[] = {0,0,0,0};
+				deletable = 0;
+				fade = 0;
+				access = 0;
+				type = 0;
+				style = 48;
+				font = "TahomaB";
+				sizeEx = 0;
+				lineSpacing = 0;
+				fixedWidth = 0;
+				shadow = 0;
+			};
+		};
+	};
+	class cod_hitmarkerRed: cod_hitmarker
+	{
+		class controls 
+		{
+			class hitmarker 
+			{
+				idc = 1201;
+				text = "media\hitmarker.paa";
+				x = 0.491186 * safezoneW + safezoneX;
+				y = 0.480596 * safezoneH + safezoneY;
+				w = 0.0176284 * safezoneW;
+				h = 0.0376157 * safezoneH;
+				colorText[] = {1,0,0,1};
+				colorBackground[] = {0,0,0,0};
+				colorActive[] = {0,0,0,0};
+				deletable = 0;
+				fade = 0;
+				access = 0;
+				type = 0;
+				style = 48;
+				font = "TahomaB";
+				sizeEx = 0;
+				lineSpacing = 0;
+				fixedWidth = 0;
+				shadow = 0;
+			};
+		};
+	};
+};
+
+//Clean up dead bodies
+corpseManagerMode = 1;
+corpseLimit = 0;
+corpseRemovalMinTime = 2;
+corpseRemovalMaxTime = 3;
+
+//Clean up wrecks
+wreckManagerMode = 1;
+wreckLimit = 10;
+wreckRemovalMinTime = 300;
+wreckRemovalMaxTime = 301;
+
+
+author = "[TFD] JohnnyShootos"; 
+OnLoadName = "Last Stand"; 
+onLoadMission = "Hold out for as long as you can."; 
+//loadScreen =  "media\load.jpg";
+joinUnassigned = 0;
+disabledAI = 1;
+enableDebugConsole = 1;
+respawn = 3;
+respawnDelay = 5; // 9999999 = No Respawn. ANY other number lower than this will be the time in seconds until a respawn is allowed from the spectator script.
+respawnButton = 0;
+respawnOnStart = 1;
+
+//Revive Settings
+ReviveMode = 1;                         //0: disabled, 1: enabled, 2: controlled by player attributes
+ReviveUnconsciousStateMode = 0;         //0: basic, 1: advanced, 2: realistic
+ReviveRequiredTrait = 0;                //0: none, 1: medic trait is required
+ReviveRequiredItems = 0;                //0: none, 1: medkit, 2: medkit or first aid kit
+ReviveRequiredItemsFakConsumed = 0;     //0: first aid kit is not consumed upon revive, 1: first aid kit is consumed
+ReviveDelay = 6;                        //time needed to revive someone (in secs)
+ReviveMedicSpeedMultiplier = 2;         //speed multiplier for revive performed by medic
+ReviveForceRespawnDelay = 2;            //time needed to perform force respawn (in secs)
+ReviveBleedOutDelay = 120;              //unconscious state duration (in secs)
+
+
+//Rotorlib
+forceRotorLibSimulation = 0; // 0 = Client gets to choose what they want to use through their own options menu settings.
+
+// Admin Panel Defines
+#include "adminpanelmk2\dialogs.hpp"
+
+// Shop Defines
+#include "functions\gui\shop\dialogs.hpp"
+#include "functions\gui\shop\inventory.hpp"
+
+//View Distance Defines
+#include "CHVD\dialog.hpp"
+

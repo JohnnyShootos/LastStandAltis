@@ -1,0 +1,468 @@
+
+#include "defines.hpp"
+class TFD_Shop_Guns
+{
+	idd = -1;
+	movingEnable = false;
+	enableSimulation = 1;
+	
+	class controls
+	{
+		////////////////////////////////////////////////////////
+		// GUI EDITOR OUTPUT START (by JohnnyShootos, v1.063, #Vawoke)
+		////////////////////////////////////////////////////////
+
+		class TFD_LOAD_BACK: l_RscText
+		{
+			idc = 1000;
+			x = 0.429486 * safezoneW + safezoneX;
+			y = 0.368345 * safezoneH + safezoneY;
+			w = 0.141027 * safezoneW;
+			h = 0.235098 * safezoneH;
+			colorBackground[] = {0,0,0,0.5};
+		};
+		class TFD_LOAD_TITLE: l_RscText
+		{
+			idc = 1001;
+			text = "Ye Olde Gear Shoppe"; //--- ToDo: Localize;
+			x = 0.429487 * safezoneW + safezoneX;
+			y = 0.349537 * safezoneH + safezoneY;
+			w = 0.141027 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			shadow = 1;
+			sizeEx = 0.035;
+		};
+		class TFD_BUTTON_1_0: l_RscButton
+		{
+			idc = 1600;
+			text = "9mm SMG: $200"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.377749 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""SMG_02_ACO_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_2_0: l_RscButton
+		{
+			idc = 1601;
+			text = "Buy Ammo"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.377749 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "closeDialog 0; createDialog ""TFD_Shop_Ammo"" ";
+		};
+		class TFD_BUTTON_1_1: l_RscButton
+		{
+			idc = 1602;
+			text = "Vermin $300"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.405961 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""SMG_01_Holo_pointer_snds_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_1_2: l_RscButton
+		{
+			idc = 1603;
+			text = "TRG-20: $500"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.434173 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""arifle_TRG20_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_1_3: l_RscButton
+		{
+			idc = 1604;
+			text = "TRG-21: $750"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.462384 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""arifle_TRG21_GL_ACO_pointer_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_1_4: l_RscButton
+		{
+			idc = 1605;
+			text = "MXC : $1000"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.490596 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""arifle_MXC_Holo_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_1_5: l_RscButton
+		{
+			idc = 1606;
+			text = "MX : $1250"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.518808 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""arifle_MX_Hamr_pointer_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_1_6: l_RscButton
+		{
+			idc = 1607;
+			text = "MX GL: $1750"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.54702 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""arifle_MX_GL_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_1_7: l_RscButton
+		{
+			idc = 1608;
+			text = "Rahim DMR: $2000"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.575231 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""srifle_DMR_01_ARCO_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_2_1: l_RscButton
+		{
+			idc = 1609;
+			text = "EBR DMR: $2500"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.405961 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""srifle_EBR_DMS_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_2_2: l_RscButton
+		{
+			idc = 1610;
+			text = "LMG: $3000"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.434173 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""LMG_Mk200_pointer_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_2_3: l_RscButton
+		{
+			idc = 1611;
+			text = "MMG: $3500"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.462384 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""LMG_Zafir_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_2_4: l_RscButton
+		{
+			idc = 1612;
+			text = "RPG 32: $1250"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.490596 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""launch_RPG32_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_2_5: l_RscButton
+		{
+			idc = 1613;
+			text = "Backpack: $300"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.518808 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""B_assaultpack_rgr"", ""pack"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_2_6: l_RscButton
+		{
+			idc = 1614;
+			text = "Hand Grenade: $75"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.54702 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""HandGrenade"", ""item"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_2_1_7: l_RscButton
+		{
+			idc = 1615;
+			text = "Smoke Grenade: $35"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.575231 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""SmokeShell"", ""item"", player] call TFD_fnc_buyEquip;";
+		};
+		////////////////////////////////////////////////////////
+		// GUI EDITOR OUTPUT END
+		////////////////////////////////////////////////////////
+
+	};
+};
+
+class TFD_Shop_Ammo
+{
+	idd = -1;
+	movingEnable = false;
+	enableSimulation = 1;
+	
+	class controls
+	{
+		////////////////////////////////////////////////////////
+		// GUI EDITOR OUTPUT START (by JohnnyShootos, v1.063, #Vawoke)
+		////////////////////////////////////////////////////////
+
+		class TFD_AMMO_BACK: l_RscText
+		{
+			idc = 1002;
+			x = 0.429486 * safezoneW + safezoneX;
+			y = 0.368345 * safezoneH + safezoneY;
+			w = 0.141027 * safezoneW;
+			h = 0.235098 * safezoneH;
+			colorBackground[] = {0,0,0,0.5};
+		};
+		class TFD_AMMO_TITLE: l_RscText
+		{
+			idc = 1003;
+			text = "Ye Olde Gear Shoppe"; //--- ToDo: Localize;
+			x = 0.429487 * safezoneW + safezoneX;
+			y = 0.349537 * safezoneH + safezoneY;
+			w = 0.141027 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			shadow = 1;
+			sizeEx = 0.035;
+		};
+		class TFD_BUTTON_3: l_RscButton
+		{
+			idc = 1616;
+			text = "Buy Guns"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.377749 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "closeDialog 0; createDialog ""TFD_Shop_Guns"" ";
+		};
+		class TFD_BUTTON_4: l_RscButton
+		{
+			idc = 1617;
+			text = "Buy Ammo"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.377749 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.2};
+			//action = "_nul = [""SMG_02_ACO_F"",""weapon"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_3_1: l_RscButton
+		{
+			idc = 1618;
+			text = "9mm Pistol: $5"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.405961 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""16Rnd_9x21_Mag"",""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_3_2: l_RscButton
+		{
+			idc = 1619;
+			text = ".45 Pistol: $5"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.434173 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""11Rnd_45ACP_Mag"",""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_3_3: l_RscButton
+		{
+			idc = 1620;
+			text = "9mm SMG: $10"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.462384 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""30Rnd_9x21_Mag"",""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_3_4: l_RscButton
+		{
+			idc = 1621;
+			text = ".45 SMG: $10"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.490596 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""30Rnd_45ACP_Mag_SMG_01"",""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_3_5: l_RscButton
+		{
+			idc = 1622;
+			text = "5.56mm Rifle: $15"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.518808 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""30Rnd_556x45_Stanag"",""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_3_6: l_RscButton
+		{
+			idc = 1623;
+			text = "6.5mm Rifle: $15"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.54702 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""30Rnd_65x39_caseless_mag"",""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_3_7: l_RscButton
+		{
+			idc = 1624;
+			text = "6.5mm 100Rnd: $40"; //--- ToDo: Localize;
+			x = 0.433894 * safezoneW + safezoneX;
+			y = 0.575231 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""100Rnd_65x39_caseless_mag_Tracer"",""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_4_1: l_RscButton
+		{
+			idc = 1625;
+			text = "10Rnd DMR: $25"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.405961 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""10Rnd_762x51_Mag"",""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_4_2: l_RscButton
+		{
+			idc = 1626;
+			text = "20Rnd DMR: $50"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.434173 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""20Rnd_762x51_Mag"",""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_4_3: l_RscButton
+		{
+			idc = 1627;
+			text = "LMG Belt: $75"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.462384 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""200Rnd_65x39_cased_Box_Tracer"",""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_4_4: l_RscButton
+		{
+			idc = 1628;
+			text = "MMG Belt: $125"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.490596 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""150Rnd_762x51_Box_Tracer"",""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_4_5: l_RscButton
+		{
+			idc = 1629;
+			text = "3GL HE: $150"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.518808 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""3Rnd_HE_Grenade_Shell"", ""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_4_6: l_RscButton
+		{
+			idc = 1630;
+			text = "3GL Smoke: $70"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.54702 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""3Rnd_Smoke_Grenade_Shell"", ""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		class TFD_BUTTON_4_7: l_RscButton
+		{
+			idc = 1631;
+			text = "RPG: $150"; //--- ToDo: Localize;
+			x = 0.504407 * safezoneW + safezoneX;
+			y = 0.575231 * safezoneH + safezoneY;
+			w = 0.0616993 * safezoneW;
+			h = 0.0188079 * safezoneH;
+			colorText[] = {1,1,1,1};
+			colorBackground[] = {1,0.25,0,0.5};
+			action = "_nul = [""RPG32_F"", ""ammo"", player] call TFD_fnc_buyEquip;";
+		};
+		////////////////////////////////////////////////////////
+		// GUI EDITOR OUTPUT END
+		////////////////////////////////////////////////////////
+
+	};
+};
+
