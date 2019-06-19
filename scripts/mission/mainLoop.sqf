@@ -17,6 +17,9 @@ while { true } do {
 		
 		_handle = [_currentWave] execVM "scripts\mission\spawnBonusWave.sqf";
 		waitUntil { scriptDone _handle };
+
+		_handle = [_currentWave] execVM "scripts\mission\spawnWave.sqf";
+		waitUntil { scriptDone _handle };
 	
 	} else {
 	

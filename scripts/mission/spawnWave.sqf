@@ -48,7 +48,7 @@ for "_n" from 1 to _infGroups do {
 	
 	} forEach units _group;
 		
-	_order = [_group, getMarkerPos "target"] call BIS_fnc_taskAttack;
+	_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
 	systemChat format ["New Group: %1, is attacking: %2", _group, _order];
 	
 	sleep 1;
@@ -59,15 +59,17 @@ for "_n" from 1 to _vehicles do {
 
 	_z = _v call BIS_fnc_selectRandom;
 	systemChat format ["Selected Zone: %1", _z];
+
+	_safePos = [getMarkerPos _z, 0, 15, 3, 0, 0.5] call BIS_fnc_findSafePos;
 	
 	_group = createGroup west;
 	if (_w > 20) then {
-		[getMarkerPos _z, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_LSV_01_AT_F", _group] call bis_fnc_spawnvehicle;	
+		[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_LSV_01_armed_F", _group] call bis_fnc_spawnvehicle;	
 	} else {
 		if (_w > 10) then {
-			[getMarkerPos _z, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_LSV_01_armed_F", _group] call bis_fnc_spawnvehicle;	
+			[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_LSV_01_armed_F", _group] call bis_fnc_spawnvehicle;	
 		} else {
-			[getMarkerPos _z, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_G_Offroad_01_armed_F", _group] call bis_fnc_spawnvehicle;
+			[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_G_Offroad_01_armed_F", _group] call bis_fnc_spawnvehicle;
 		};
 	};
 	
@@ -79,7 +81,7 @@ for "_n" from 1 to _vehicles do {
 		_x setSkill ["aimingSpeed", _aimSpeed];
 	} forEach units _group;
 	
-	_order = [_group, getMarkerPos "target"] call BIS_fnc_taskAttack;
+	_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
 	systemChat format ["New Group: %1, is attacking: %2", _group, _order];
 	
 	
@@ -92,15 +94,17 @@ for "_n" from 1 to _armedVehicles do {
 
 	_z = _v call BIS_fnc_selectRandom;
 	systemChat format ["Selected Zone: %1", _z];
+
+	_safePos = [getMarkerPos _z, 0, 15, 3, 0, 0.5] call BIS_fnc_findSafePos;
 	
 	_group = createGroup west;
 	if (_w > 20) then {
-		[getMarkerPos _z, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_T_APC_Tracked_01_rcws_F", _group] call bis_fnc_spawnvehicle;	
+		[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_T_APC_Tracked_01_rcws_F", _group] call bis_fnc_spawnvehicle;	
 	} else {
 		if (_w > 10) then {
-			[getMarkerPos _z, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_T_APC_Wheeled_01_cannon_F", _group] call bis_fnc_spawnvehicle;	
+			[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_T_APC_Wheeled_01_cannon_F", _group] call bis_fnc_spawnvehicle;	
 		} else {
-			[getMarkerPos _z, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_MRAP_01_hmg_F", _group] call bis_fnc_spawnvehicle;
+			[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_MRAP_01_hmg_F", _group] call bis_fnc_spawnvehicle;
 		};
 	};
 	_group allowFleeing 0;
@@ -111,7 +115,7 @@ for "_n" from 1 to _armedVehicles do {
 		_x setSkill ["aimingSpeed", _aimSpeed];
 	} forEach units _group;
 	
-	_order = [_group, getMarkerPos "target"] call BIS_fnc_taskAttack;
+	_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
 	systemChat format ["New Group: %1, is attacking: %2", _group, _order];
 	
 	sleep 1;
@@ -122,10 +126,12 @@ for "_n" from 1 to _tankVehicles do {
 
 	_z = _v call BIS_fnc_selectRandom;
 	systemChat format ["Selected Zone: %1", _z];
+
+	_safePos = [getMarkerPos _z, 0, 15, 3, 0, 0.5] call BIS_fnc_findSafePos;
 	
 	_group = createGroup west;
 
-	[getMarkerPos _z, ([getMarkerPos _z, getMarkerpos "target"]  call BIS_fnc_dirTo), "B_MBT_01_TUSK_F", _group] call bis_fnc_spawnvehicle;
+	[_safePos, ([getMarkerPos _z, getMarkerpos "target"]  call BIS_fnc_dirTo), "B_MBT_01_TUSK_F", _group] call bis_fnc_spawnvehicle;
 	
 	_group allowFleeing 0;
 	
@@ -135,7 +141,7 @@ for "_n" from 1 to _tankVehicles do {
 		_x setSkill ["aimingSpeed", _aimSpeed];	
 	} forEach units _group;
 	
-	_order = [_group, getMarkerPos "target"] call BIS_fnc_taskAttack;
+	_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
 	systemChat format ["New Group: %1, is attacking: %2", _group, _order];
 	
 	sleep 1;

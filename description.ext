@@ -41,7 +41,7 @@ class Params
 		title = "Game Difficulty";
 		values[] = {1,2,3};
 		texts[] = {"Normal","Hard","Nightmare"};
-		default = 2;
+		default = 1;
 	};
 	class SpacerRevive
 	{
