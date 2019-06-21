@@ -17,6 +17,9 @@ NEXTWAVE = "StartWave" call BIS_fnc_getParamValue; publicVariable "NEXTWAVE";
 	
 };
 
+//Hide Terrain Upgrades
+[[ul_0,ul_1,ul_2,ul_3,ul_4], true] call TFD_fnc_hideUpgrade;
+
 //Initialise Admin Panel
 nul = [] execVM "adminpanelmk2\init.sqf";
 

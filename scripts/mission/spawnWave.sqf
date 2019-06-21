@@ -23,6 +23,19 @@ _aimAccuracy = (0.1 * _difficulty);
 _aimShake = (0.1 * _difficulty);
 _aimSpeed = (0.25 * _difficulty);
 
+//Enemy Infantry Group Types
+_infTypes = ["BUS_ReconTeam", "BUS_InfTeam", "BUS_InfSquad"];
+
+//Enemy Vehicle Types
+_vehTypes = ["B_LSV_01_unarmed_F", "B_LSV_01_armed_F", "B_MRAP_01_hmg_F"];
+
+//Enemy Armored Vehicle Types
+_armorVehTypes = ["B_MRAP_01_hmg_F","B_T_APC_Tracked_01_rcws_F","B_T_APC_Wheeled_01_cannon_F"];
+
+//Enemy Tank Types
+_tankTypes = ["B_MBT_01_TUSK_F"];
+
+
 //Spawn infantry groups
 for "_n" from 1 to _infGroups do {
 	_z = _m call BIS_fnc_selectRandom;
@@ -30,12 +43,12 @@ for "_n" from 1 to _infGroups do {
 	
 	_group = createGroup west;
 	if (_w > 20) then {
-		_group = [getMarkerPos _z, west, (configfile >> "CfgGroups" >> "West" >> "BLU_CTRG_F" >> "Infantry" >> "CTRG_InfSquad"), [], [], [0.2,0.3], [], [], ([getMarkerpos "target", getMarkerPos _z] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;	
+		_group = [getMarkerPos _z, west, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> (_infTypes # 2)), [], [], [0.2,0.3], [], [], ([getMarkerpos "target", getMarkerPos _z] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;	
 	} else {
 		if (_w > 10) then {
-			_group = [getMarkerPos _z, west, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> "BUS_InfTeam"), [], [], [0.2,0.3], [], [], ([getMarkerpos "target", getMarkerPos _z] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;	
+			_group = [getMarkerPos _z, west, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> (_infTypes # 1)), [], [], [0.2,0.3], [], [], ([getMarkerpos "target", getMarkerPos _z] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;	
 		} else {
-			_group = [getMarkerPos _z, west, (configfile >> "CfgGroups" >> "West" >> "Guerilla" >> "Infantry" >> "IRG_InfTeam"), [], [], [0.2,0.3], [], [], ([getMarkerpos "target", getMarkerPos _z] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;
+			_group = [getMarkerPos _z, west, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> (_infTypes # 0)), [], [], [0.2,0.3], [], [], ([getMarkerpos "target", getMarkerPos _z] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;
 		};
 	};
 	
@@ -45,6 +58,8 @@ for "_n" from 1 to _infGroups do {
 		_x setSkill ["aimingAccuracy", _aimAccuracy]; 
 		_x setSkill ["aimingShake", _aimShake];
 		_x setSkill ["aimingSpeed", _aimSpeed];
+		removeAllPrimaryWeaponItems _x;
+		removeAllHandgunItems _x;
 	
 	} forEach units _group;
 		
@@ -64,12 +79,12 @@ for "_n" from 1 to _vehicles do {
 	
 	_group = createGroup west;
 	if (_w > 20) then {
-		[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_LSV_01_armed_F", _group] call bis_fnc_spawnvehicle;	
+		[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 2), _group] call bis_fnc_spawnvehicle;	
 	} else {
 		if (_w > 10) then {
-			[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_LSV_01_armed_F", _group] call bis_fnc_spawnvehicle;	
+			[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 1), _group] call bis_fnc_spawnvehicle;	
 		} else {
-			[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_G_Offroad_01_armed_F", _group] call bis_fnc_spawnvehicle;
+			[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 0), _group] call bis_fnc_spawnvehicle;
 		};
 	};
 	
@@ -99,12 +114,12 @@ for "_n" from 1 to _armedVehicles do {
 	
 	_group = createGroup west;
 	if (_w > 20) then {
-		[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_T_APC_Tracked_01_rcws_F", _group] call bis_fnc_spawnvehicle;	
+		[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_armorVehTypes # 2), _group] call bis_fnc_spawnvehicle;	
 	} else {
 		if (_w > 10) then {
-			[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_T_APC_Wheeled_01_cannon_F", _group] call bis_fnc_spawnvehicle;	
+			[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_armorVehTypes # 1), _group] call bis_fnc_spawnvehicle;	
 		} else {
-			[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), "B_MRAP_01_hmg_F", _group] call bis_fnc_spawnvehicle;
+			[_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_armorVehTypes # 0), _group] call bis_fnc_spawnvehicle;
 		};
 	};
 	_group allowFleeing 0;
@@ -131,7 +146,7 @@ for "_n" from 1 to _tankVehicles do {
 	
 	_group = createGroup west;
 
-	[_safePos, ([getMarkerPos _z, getMarkerpos "target"]  call BIS_fnc_dirTo), "B_MBT_01_TUSK_F", _group] call bis_fnc_spawnvehicle;
+	[_safePos, ([getMarkerPos _z, getMarkerpos "target"]  call BIS_fnc_dirTo), (_tankTypes # 0), _group] call bis_fnc_spawnvehicle;
 	
 	_group allowFleeing 0;
 	

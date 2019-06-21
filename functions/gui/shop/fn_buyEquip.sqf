@@ -42,7 +42,7 @@ switch (_itemType) do {
 				
 				player removeWeapon _primaryWeapon;
 			};
-			player addMagazine getText(missionConfigFile >> "ShopList" >> "GunsList" >> _itemName >> "magazine");
+			player addMagazine (getArray(configFile >> "CfgWeapons" >> _itemName >> "magazines") # 0);
 			player addWeapon _itemName;
 			AWARD = [(0 - _itemCost), _plyr]; publicVariableServer "AWARD";
 		};

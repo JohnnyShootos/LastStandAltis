@@ -1,15 +1,12 @@
 
 **SHOP CHANGES NEEDED**
-- Redo Gun list to include updated weapon systems.
-- Add Bipods to gear.
-- Redo the way ammo is purchased to streamline it - (Primary | Secondary | Launcher | Frags | Smoke | 40mm)
+- Redo the way ammo is purchased to streamline it - (Primary | Secondary | Launcher | Frags | Smoke | 40mm) - IN PROGRESS
 
 **GAMEPLAY CHANGES NEEDED**
 
 **FUTURE PLANS**
 - COMPLETE SHOP INTERFACE REDESIGN TO LOOK NICE
 - ADD STATIC WEAPONS TO SHOP
-- PURCHASEABLE TERRAIN UPGRADES
 - KILLSTREAK REWARDS (OFF MAP ARTILLERY | A10 RUNS | AI DRONES | FRIENDLY AI UNITS)
 
 **CHANGELIST**
@@ -24,4 +21,7 @@
 - holster script - ADDED AND BOUND TO THE 0 KEY
 - Rangefinders not working in shop. - DONE
 - redo the way ammo is added to vests & backpacks to ignore total weight limit - NOT POSSIBLE UNLESS MODDED IN
+- Redo Gun list to include updated weapon systems. - DONE
+- Add Bipods to gear. - DONE
+- PURCHASEABLE TERRAIN UPGRADES - DONE
 

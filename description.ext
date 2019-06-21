@@ -18,9 +18,9 @@ class Params
 	class StartCash
 	{
 		title = "Starting Cash";
-		values[]= {0,1000,1500,2000,999999};
-		texts[] = {"None","1000","1500","2000","Debug"};
-		default = 2000;
+		values[]= {0,1000,3000,6000,999999};
+		texts[] = {"None","1000","3000","6000","Debug"};
+		default = 1000;
 	};
 	class StartWave
 	{
@@ -34,13 +34,13 @@ class Params
 		title = "Time Between Waves in Seconds";
 		values[] = {30,45,60,90,120};
 		texts[] = {"30","45","60","90","120"};
-		default = 60;
+		default = 30;
 	};
 	class GameDifficulty
 	{
 		title = "Game Difficulty";
-		values[] = {1,2,3};
-		texts[] = {"Normal","Hard","Nightmare"};
+		values[] = {1,2,3,4};
+		texts[] = {"* Normal","** Hard","*** Heroic","**** Nightmare"};
 		default = 1;
 	};
 	class SpacerRevive
@@ -170,6 +170,7 @@ author = "[TFD] JohnnyShootos";
 OnLoadName = "Last Stand"; 
 onLoadMission = "Hold out for as long as you can."; 
 //loadScreen =  "media\load.jpg";
+//skipLobby = 1;
 joinUnassigned = 0;
 disabledAI = 1;
 enableDebugConsole = 1;
@@ -180,10 +181,10 @@ respawnOnStart = 1;
 
 //Revive Settings
 ReviveMode = 1;                         //0: disabled, 1: enabled, 2: controlled by player attributes
-ReviveUnconsciousStateMode = 0;         //0: basic, 1: advanced, 2: realistic
+ReviveUnconsciousStateMode = 1;         //0: basic, 1: advanced, 2: realistic
 ReviveRequiredTrait = 0;                //0: none, 1: medic trait is required
-ReviveRequiredItems = 0;                //0: none, 1: medkit, 2: medkit or first aid kit
-ReviveRequiredItemsFakConsumed = 0;     //0: first aid kit is not consumed upon revive, 1: first aid kit is consumed
+ReviveRequiredItems = 2;                //0: none, 1: medkit, 2: medkit or first aid kit
+ReviveRequiredItemsFakConsumed = 1;     //0: first aid kit is not consumed upon revive, 1: first aid kit is consumed
 ReviveDelay = 6;                        //time needed to revive someone (in secs)
 ReviveMedicSpeedMultiplier = 2;         //speed multiplier for revive performed by medic
 ReviveForceRespawnDelay = 2;            //time needed to perform force respawn (in secs)

@@ -13,5 +13,8 @@ class TFD
 		file = "functions\misc";
 		class simpleBoxFill {};
 		class clientHolster {};
+		class hideUpgrade {};
+		class purchaseUpgrade {};
+		class upgradeActionAdd {};
 	};
 };

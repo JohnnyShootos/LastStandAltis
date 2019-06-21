@@ -1,6 +1,6 @@
 waitUntil { sleep 1; time > 1 };
 
-STARTING_CASH = "StartCash" call BIS_fnc_getParamValue;
+STARTING_CASH = ("StartCash" call BIS_fnc_getParamValue) / ("GameDifficulty" call BIS_fnc_getParamValue);
 
 player addEventHandler ["HandleRating",
 
@@ -13,12 +13,12 @@ player addEventHandler ["HandleRating",
 		
 		if ( _s >= 0 ) then {
 		
-			AWARD = [(_s / 2), _p]; 
+			AWARD = [floor ((_s*("GameDifficulty" call BIS_fnc_getParamValue)) / 2), _p]; 
 			publicVariableServer "AWARD";
 		
 		} else { 
 		
-			AWARD = [(_s / 10), _p];
+			AWARD = [floor ((_s*("GameDifficulty" call BIS_fnc_getParamValue)) / 2), _p];
 			publicVariableServer "AWARD";
 		
 		};
@@ -59,8 +59,9 @@ player addEventHandler ["HandleRating",
 		waitUntil { damage player > 0 };
 		
 		while { damage player > 0 } do {
-			player setDamage (damage player - 0.1);
-			sleep 5;
+			sleep 1;
+			player setDamage (damage player - 0.01);
+			
 			//revive the player if they were downed
 			if ((damage player == 0) && (lifeState player == "INCAPACITATED")) then {["#rev", 1, player] call BIS_fnc_reviveOnState};
 		};

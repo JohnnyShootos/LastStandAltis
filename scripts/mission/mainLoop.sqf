@@ -46,10 +46,10 @@ while { true } do {
 	//Wait for enemies to be all dead or players to be all dead or incapacitated.
 	waitUntil { { alive _x && !(_x in playableUnits)} count allUnits < 1 || { alive _x } count playableUnits == 0 || {lifeState _x == "INCAPACITATED"} count playableUnits == count playableUnits};
 	
-	
+	_survivors = { alive _x } count playableUnits;
 	//Successful wave (all enemies dead)
-	if ({ alive _x } count playableUnits > 0 && ({lifeState _x == "INCAPACITATED"} count playableUnits != count playableUnits)) then {
-		_survivors = { alive _x } count playableUnits;
+	if (_survivors > 0 && ({lifeState _x == "INCAPACITATED"} count playableUnits != count playableUnits)) then {
+		
 		{ 
 			//Respawn time to 1 sec players if they are dead
 			[1, "setPlayerRespawnTime"] call BIS_fnc_MP;
@@ -69,7 +69,7 @@ while { true } do {
 					
 			
 			//Reward the players for completing the wave
-			CHANGEMONEY = (500 * ("GameDifficulty" call BIS_fnc_getParamValue)) +  (50 * _currentWave * ("GameDifficulty" call BIS_fnc_getParamValue)) + (50 * _survivors * ("GameDifficulty" call BIS_fnc_getParamValue));
+			CHANGEMONEY = (500 * ("GameDifficulty" call BIS_fnc_getParamValue)) +  (100 * _currentWave) + (50 * _survivors * ("GameDifficulty" call BIS_fnc_getParamValue));
 			(owner _x) publicVariableClient "CHANGEMONEY";
 		
 		} forEach playableUnits;
