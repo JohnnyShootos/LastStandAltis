@@ -27,7 +27,7 @@ _aimSpeed = (0.25 * _difficulty);
 _infTypes = ["BUS_ReconTeam", "BUS_InfTeam", "BUS_InfSquad"];
 
 //Enemy Vehicle Types
-_vehTypes = ["B_LSV_01_unarmed_F", "B_LSV_01_armed_F", "B_MRAP_01_hmg_F"];
+_vehTypes = ["B_G_Offroad_01_armed_F", "B_LSV_01_armed_F", "B_MRAP_01_hmg_F"];
 
 //Enemy Armored Vehicle Types
 _armorVehTypes = ["B_MRAP_01_hmg_F","B_T_APC_Tracked_01_rcws_F","B_T_APC_Wheeled_01_cannon_F"];

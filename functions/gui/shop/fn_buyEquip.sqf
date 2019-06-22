@@ -61,7 +61,7 @@ switch (_itemType) do {
 				publicVariableServer "AWARD";
 				player removeWeapon _handgunWeapon;
 			};
-			player addMagazine getText(missionConfigFile >> "ShopList" >> "GunsList" >> _itemName >> "magazine");
+			player addMagazine (getArray(configFile >> "CfgWeapons" >> _itemName >> "magazines") # 0);
 			player addWeapon _itemName;
 			AWARD = [(0 - _itemCost), _plyr]; publicVariableServer "AWARD";
 		};
@@ -81,7 +81,7 @@ switch (_itemType) do {
 				
 				player removeWeapon _secondaryWeapon;
 			};
-			player addMagazine getText(missionConfigFile >> "ShopList" >> "GunsList" >> _itemName >> "magazine");
+			player addMagazine (getArray(configFile >> "CfgWeapons" >> _itemName >> "magazines") # 0);
 			player addWeapon _itemName;
 			AWARD = [(0 - _itemCost), _plyr]; publicVariableServer "AWARD";
 		};
@@ -191,15 +191,15 @@ switch (_itemType) do {
 	case "item": 
 	{
 		if (player canAddItemToUniform _itemName) then {
-			player addMagazine _itemName;
+			player addItem _itemName;
 			AWARD = [(0 - _itemCost), _plyr]; publicVariableServer "AWARD";
 		} else {
 			if (player canAddItemToVest _itemName) then {
-				player addMagazine _itemName;
+				player addItem _itemName;
 				AWARD = [(0 - _itemCost), _plyr]; publicVariableServer "AWARD";
 			} else {
 				if (player canAddItemToBackpack _itemName) then {
-					player addMagazine _itemName;
+					player addItem _itemName;
 					AWARD = [(0 - _itemCost), _plyr]; publicVariableServer "AWARD";
 				} else {
 					[format["<t size='0.66' color='#ffff00'>INVENTORY FULL</t>", _amt], 0, 0, 1, 0, -0.25] spawn BIS_fnc_dynamicText;

@@ -70,7 +70,7 @@ class CfgSounds
 		// how the sound is referred to in the editor (e.g. trigger effects)
 		name = "cod_hitmarker";
 		// filename, volume, pitch
-		sound[] = {"media\hitsound.ogg", 1, 1};
+		sound[] = {"media\hitsound.ogg", db +20, 1, 1};
 		// subtitle delay in seconds, subtitle text
 		titles[] = {0,""};
 	};
