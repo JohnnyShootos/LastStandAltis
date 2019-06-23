@@ -11,8 +11,10 @@ class TFD
 	class misc
 	{
 		file = "functions\misc";
+		class addKilledEH {};
 		class simpleBoxFill {};
 		class clientHolster {};
+		class forwardObserverArtillery {};
 		class hideUpgrade {};
 		class purchaseUpgrade {};
 		class upgradeActionAdd {};

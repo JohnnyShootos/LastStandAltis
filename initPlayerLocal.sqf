@@ -2,6 +2,7 @@ waitUntil { sleep 1; time > 1 };
 
 STARTING_CASH = ("StartCash" call BIS_fnc_getParamValue) / ("GameDifficulty" call BIS_fnc_getParamValue);
 
+/** OLD REWARD EVENTHANDLER
 player addEventHandler ["HandleRating",
 
 	{
@@ -25,6 +26,7 @@ player addEventHandler ["HandleRating",
 		//systemChat format ["Transmitted Award to server is : %1", AWARD];
 	}
 ];
+ */
 
 "CHANGEMONEY" addPublicVariableEventHandler {
 	

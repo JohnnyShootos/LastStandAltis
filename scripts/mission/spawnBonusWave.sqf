@@ -40,7 +40,7 @@ systemChat _type;
 
 _grp = grpNull;
 
-//Spawn Technicals
+//Spawn Helicopters
 for "_n" from 1 to 1 do { 
 
 	_grp = createGroup west;
@@ -48,12 +48,15 @@ for "_n" from 1 to 1 do {
 	_grp allowFleeing 0;
 	
 	{
+		_x call TFD_fnc_addKilledEH;
 		_x setSkill ["aimingAccuracy", _aimAccuracy]; 
 		_x setSkill ["aimingShake", _aimShake];
 		_x setSkill ["aimingSpeed", _aimSpeed];
-		
-		
-	} forEach units _grp;
+		removeAllPrimaryWeaponItems _x;
+		removeAllHandgunItems _x;
+	} forEach (_vehArray # 1);
+
+	(_vehArray # 0) call TFD_fnc_addKilledEH;
 	
 	_nul = _vehArray spawn { 
 		_u = _this select 0; 
