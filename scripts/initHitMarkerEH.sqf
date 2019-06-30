@@ -10,7 +10,7 @@ if !(_test) then {
 		if (_target isKindOf "Man") then {
 			if (_part == "head") then {
 				["hitmarker",["cod_hitmarkerRed", "PLAIN", 0, false]] remoteExec ["cutRsc", _shooter];
-				"hitmarker" remoteExec ["playSound", _shooter];
+				"headdink" remoteExec ["playSound", _shooter];
 			} else {
 				["hitmarker",["cod_hitmarker", "PLAIN", 0, false]] remoteExec ["cutRsc", _shooter];
 				"hitmarker" remoteExec ["playSound", _shooter];

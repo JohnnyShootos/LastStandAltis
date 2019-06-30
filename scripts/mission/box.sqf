@@ -20,15 +20,20 @@ _box addEventHandler [ "ContainerOpened",
 		_i = _this select 2;
 		
 		if (typeOf _b == "O_supplyCrate_F") then {
-		_cost = floor ((([_i] call TFD_fnc_getPrice) select 2) * 0.80);
-		
-		AWARD = [_cost, _p];
-		publicVariableServer "AWARD";
-		
-		clearWeaponCargoGlobal _b; 
-		clearItemCargoGlobal _b; 
-		clearMagazineCargoGlobal _b; 
-		clearBackpackCargoGlobal _b;
+			
+			_check = count ([_i] call TFD_fnc_getPrice) == 3;
+			
+			if (_check) then {
+				
+				_cost = floor ((([_i] call TFD_fnc_getPrice) select 2) * 0.80);
+				AWARD = [_cost, _p];
+				publicVariableServer "AWARD";
+			};
+			
+			clearWeaponCargoGlobal _b; 
+			clearItemCargoGlobal _b; 
+			clearMagazineCargoGlobal _b; 
+			clearBackpackCargoGlobal _b;
 		}; 
 		}
 	];

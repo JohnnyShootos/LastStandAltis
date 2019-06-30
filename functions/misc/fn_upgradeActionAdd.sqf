@@ -1,5 +1,7 @@
 params ["_box", "_logic", "_description"];
-_cost = (_box getVariable ['cost', 999999]);
+_costBase = (_box getVariable ['cost', 999999]);
+_modifier = (("BuildCostModifier" call BIS_fnc_getParamValue)/2);
+_cost = _costBase*_modifier;
 
 [
 	_box, 

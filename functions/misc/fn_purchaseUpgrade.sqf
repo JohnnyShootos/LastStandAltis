@@ -4,7 +4,10 @@ _player = player;
 
 _logic = _logicArray # 0;
 
-_cost = _triggerObj getVariable ["cost", 99999999];
+_baseCost = (_triggerObj getVariable ["cost", 99999999]);
+_modifier = (("BuildCostModifier" call BIS_fnc_getParamValue)/2);
+
+_cost = _baseCost * _modifier;
 
 _currentCash = _player getVariable ["Cash", 0];
 

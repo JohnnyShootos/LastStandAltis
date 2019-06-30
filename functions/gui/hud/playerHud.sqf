@@ -26,7 +26,7 @@ while {true} do
 	_hudActivityTextbox = _ui displayCtrl hud_activity_textbox_idc;
 
 	//Calculate Health 0 - 100
-	_health = ((1 - damage player) * 100) max 0;
+	_health = ((1 - (player getVariable ['jsh_health',0])) * 100) max 0;
 	_health = if (_health > 1) then { floor _health } else { ceil _health };
 
 	// Flash the health colour on the HUD according to it going up, down or the same
@@ -60,6 +60,5 @@ while {true} do
 	_vitals ctrlSetStructuredText parseText _str;
 	_vitals ctrlCommit 0;
 	
-	
-	uiSleep 1;
+	uiSleep 0.2;
 };

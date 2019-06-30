@@ -12,6 +12,8 @@ class TFD
 	{
 		file = "functions\misc";
 		class addKilledEH {};
+		class damageSystemInit {};
+		class medSystemInit {};
 		class simpleBoxFill {};
 		class clientHolster {};
 		class forwardObserverArtillery {};

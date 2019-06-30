@@ -3,14 +3,17 @@ disableSerialization;
 _ctrl = (findDisplay 6969) displayCtrl IDC_ADMINPANELMK2_JSH_GUI_ADMIN_LISTBOX;
 _data = _ctrl lbValue lbCurSel _ctrl;
 _name = _ctrl lbData lbCurSel _ctrl;
-_target = objNull;
-{
-    if (_name == (_x select 0)) then {
-        if (_data == (_x select 1)) then {
-                _target = (_x select 2);
+_target = _name call {
+    {
+        params ["_name"];
+        _unit = objNull;
+        if (_name == (_x select 0)) then {
+            _unit = (_x select 2);
         };
-    };
-} forEach JSH_ADMIN_PLAYERLIST_DATA;
+
+    } forEach JSH_ADMIN_PLAYERLIST_DATA;
+    _unit
+};
 
 systemChat str _target;
 _shiftKey = _this select 4;
@@ -21,23 +24,33 @@ _altKey = _this select 6;
 if (_ctrlKey) then {
     if (_ctrlKey && _altKey) then {
         //TP them to you
-        _safePos = [(getPosWorld vehicle player), 1, 10, 1, 1, 1, 0] call BIS_fnc_findSafePos;
+        _safePos = [(getPos vehicle player), 1, 5, 1, 1, 1, 0] call BIS_fnc_findSafePos;
 
         if (_name != name player) then {
+
             if ((typeOf vehicle _target) isKindOf "Man") then {
-                _target setPosWorld _safePos;
+                
+                _target setPos _safePos;
+
             } else {
+                [_target, false] remoteExecCall ["allowDamage", 0];
                 moveOut _target;
-                _target setPosWorld _safePos;
+                sleep 0.5;
+                _target setPos _safePos;
+                [_target, true] remoteExecCall ["allowDamage", 0];
+
             };
         };
+
     } else {
+
         //TP you to them
-        _safePos = [(getPosWorld vehicle _target), 1, 10, 1, 1, 1, 0] call BIS_fnc_findSafePos;
+        _safePos = [(getPos _target), 1, 5, 1, 1, 1, 0] call BIS_fnc_findSafePos;
 
         if (_name != name player) then {
-            player setPosWorld _safePos;
+            player setPos _safePos;
         };
+
     };
 } else {
     _check = player getVariable ["jsh_adminTeleport", false];

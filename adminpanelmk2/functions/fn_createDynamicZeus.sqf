@@ -4,7 +4,7 @@ Creates a dynamic Zeus Module.
 This code must be either run on the server machine or remoteExec from a client & targeting the server machine.
 
 Syntax:
-	[params] call 
+	[params] call TFD_fnc_createDynamicZeus
 
 Parameters:
 
@@ -21,8 +21,8 @@ Example:
 
 params ["_player","_owner","_curatorGroup"];	
 
-	//Prevent spawning unecessary curators
-	if ((getAssignedCuratorLogic _player) isEqualTo objNull) then {
+//Prevent spawning unecessary curators
+if ((getAssignedCuratorLogic _player) isEqualTo objNull) then {
 
 	//Spawn and configure the zeus
 	_curatorModule = _curatorGroup createunit ["ModuleCurator_F", [0, 90, 90], [], 0.5, "NONE"];

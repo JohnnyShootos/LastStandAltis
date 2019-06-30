@@ -6,15 +6,19 @@ class ShopList {
 				cost = 100;
 				itemtype = "handgun";
 		};
-		class arifle_AKS_F {
+		class hgun_PDW2000_F {
+				cost = 200;
+				itemtype = "weapon";
+		};
+		class SMG_05_F {
 				cost = 200;
 				itemtype = "weapon";
 		};
 		class SMG_03C_black {
-				cost = 300;
+				cost = 400;
 				itemtype = "weapon";
 		};
-		class arifle_AKM_F {
+		class arifle_SPAR_01_blk_F {
 				cost = 500;
 				itemtype = "weapon";
 		};
@@ -38,9 +42,17 @@ class ShopList {
 				cost = 3000;
 				itemtype = "weapon";
 		};
+		class srifle_LRR_camo_F {
+				cost = 2000;
+				itemtype = "weapon";
+		};
 		class launch_RPG7_F {
 				cost = 1000;
 				itemtype = "launcher";
+		};
+		class launch_I_Titan_short_F {
+			cost = 2000;
+			itemtype = "launcher";
 		};
 		class launch_I_Titan_F {
 				cost = 1000;
@@ -75,7 +87,9 @@ class ShopList {
 				cost = 100;
 				itemtype = "hidden";
 		};
+		
 	};
+	
 	class AmmoList {
 		
 		class 10Rnd_9x21_Mag {
@@ -86,16 +100,20 @@ class ShopList {
 				cost = 15;
 				itemtype = "magazine";
 		};
-		class 30Rnd_545x39_Mag_F {
+		class 30Rnd_9x21_Mag {
+				cost = 25;
+				itemtype = "magazine";
+		};
+		class 30Rnd_9x21_Mag_SMG_02 {
 				cost = 25;
 				itemtype = "magazine";
 		};
 		class 50Rnd_570x28_SMG_03 {
-				cost = 30;
+				cost = 50;
 				itemtype = "magazine";
 		};
-		class 30Rnd_762x39_Mag_F {
-				cost = 75;
+		class 30Rnd_556x45_Stanag {
+				cost = 50;
 				itemtype = "magazine";
 		};
 		class 30Rnd_762x39_AK12_Mag_F {
@@ -114,11 +132,15 @@ class ShopList {
 				cost = 500;
 				itemtype = "magazine";
 		};
-		class 1Rnd_HE_Grenade_shell {
-				cost = 75;
-				itemtype = "magazine";
+		class 7Rnd_408_Mag {
+			cost = 200;
+			itemtype = "magazine";
 		};
 		class RPG7_F {
+				cost = 250;
+				itemtype = "magazine";
+		};
+		class Titan_AT { 
 				cost = 500;
 				itemtype = "magazine";
 		};
@@ -131,7 +153,7 @@ class ShopList {
 				itemtype = "magazine";
 		};
 		class HandGrenade {
-				cost = 75;
+				cost = 100;
 				itemtype = "magazine";
 		};
 		class SmokeShell {
@@ -166,8 +188,16 @@ class ShopList {
 				cost = 50;
 				itemtype = "magazine";
 		};
+		class Chemlight_red {
+				cost = 10;
+				itemtype = "magazine";
+		};
 		class Chemlight_green {
 				cost = 10;
+				itemtype = "magazine";
+		};
+		class 1Rnd_HE_Grenade_shell {
+				cost = 75;
 				itemtype = "magazine";
 		};
 		class 1Rnd_Smoke_Grenade_shell {
@@ -212,12 +242,20 @@ class ShopList {
 			cost = 100;
 			itemtype = "item";
 		};
+		class Medikit {
+			cost = 500;
+			itemtype = "item";
+		};
+		class H_PASGT_basic_olive_F {
+			cost = 100;
+			itemtype = "helmet";
+		};
 		class H_HelmetSpecB {
-				cost = 100;
+				cost = 300;
 				itemtype = "helmet";
 		};
 		class V_Chestrig_oli {
-				cost = 200;
+				cost = 100;
 				itemtype = "vest";
 		};
 		class V_TacVest_oli {
@@ -225,11 +263,11 @@ class ShopList {
 				itemtype = "vest";
 		};
 		class V_PlateCarrierGL_rgr {
-			cost = 500;
+			cost = 900;
 			itemtype = "vest";
 		};
 		class B_FieldPack_oli {
-			cost = 200;
+			cost = 100;
 			itemtype = "backpack";
 		};
 		class B_Carryall_oli {
@@ -284,6 +322,14 @@ class ShopList {
 			cost = 100;
 			itemtype = "weapacc";
 		};
+		class muzzle_snds_L {
+			cost = 100;
+			itemtype = "weapacc";
+		};
+		class muzzle_snds_570 {
+			cost = 250;
+			itemtype = "weapacc";
+		};
 		class muzzle_snds_M {
 			cost = 250;
 			itemtype = "weapacc";
@@ -306,7 +352,7 @@ class ShopList {
 				itemtype = "hidden";
 		};
 		class ItemWatch {
-				cost = 100;
+				cost = 1000;
 				itemtype = "hidden";
 		};
 		class ItemRadio {

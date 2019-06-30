@@ -6,6 +6,8 @@ waitUntil { scriptDone _handle };
 _handle = [] execVM "scripts\playerSetup.sqf";
 waitUntil { scriptDone _handle };
 
+player setDir ([player, sphere_target] call BIS_fnc_dirTo);
+
 //Close the spectator if the player respawned during the mission
 ["Terminate"] call BIS_fnc_EGSpectator;
 

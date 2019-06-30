@@ -6,6 +6,31 @@ class Header
 	maxPlayers = 25;
 };
 
+author = "[TFD] JohnnyShootos"; 
+OnLoadName = "Last Stand"; 
+onLoadMission = "Hold out for as long as you can."; 
+//loadScreen =  "media\load.jpg";
+//skipLobby = 1;
+joinUnassigned = 0;
+disabledAI = 1;
+enableDebugConsole = 1;
+respawn = 3;
+respawnDialog = 0;
+respawnDelay = 5; // 9999999 = No Respawn. ANY other number lower than this will be the time in seconds until a respawn is allowed from the spectator script.
+respawnButton = 0;
+respawnOnStart = 1;
+
+//Revive Settings
+ReviveMode = 1;                         //0: disabled, 1: enabled, 2: controlled by player attributes
+ReviveUnconsciousStateMode = 0;         //0: basic, 1: advanced, 2: realistic
+ReviveRequiredTrait = 0;                //0: none, 1: medic trait is required
+ReviveRequiredItems = 2;                //0: none, 1: medkit, 2: medkit or first aid kit
+ReviveRequiredItemsFakConsumed = 1;     //0: first aid kit is not consumed upon revive, 1: first aid kit is consumed
+ReviveDelay = 6;                        //time needed to revive someone (in secs)
+ReviveMedicSpeedMultiplier = 2;         //speed multiplier for revive performed by medic
+ReviveForceRespawnDelay = 2;            //time needed to perform force respawn (in secs)
+ReviveBleedOutDelay = 120;              //unconscious state duration (in secs)
+
 class Params
 {
 	class SpacerMain
@@ -21,6 +46,12 @@ class Params
 		values[]= {0,1000,3000,6000,999999};
 		texts[] = {"None","1000","3000","6000","Debug"};
 		default = 1000;
+	};
+	class BuildCostModifier {
+		title = "Building Cost Multiplier";
+		values[]= {1,2,3,4,6};
+		texts[] = {"0.5x","1.0x","1.5x","2.0x","3.0x"};
+		default = 2;
 	};
 	class StartWave
 	{
@@ -40,17 +71,67 @@ class Params
 	{
 		title = "Game Difficulty";
 		values[] = {1,2,3,4};
-		texts[] = {"* Normal","** Hard","*** Heroic","**** Nightmare"};
+		texts[] = {"Easy","Normal","Veteran","Nightmare"};
 		default = 1;
 	};
-	class SpacerRevive
+	class SpacerMission
 	{
-		title = "          === Arma 3 Revive Settings ===";
+		title = "          === Income Settings ===";
 		values[] = {0};
 		texts[] = {""};
 		default = 0;
 	};
-	#include "\a3\Functions_F\Params\paramRevive.hpp"
+	class BaseRewardMan
+	{
+		title = "Income per Infantry killed";
+		values[] = {50,100,150,200};
+		default = 50;
+	};
+	class BaseRewardCar
+	{
+		title = "Income per Car killed";
+		values[] = {250,500,750,1000};
+		default = 250;
+	};
+	class BaseRewardAPC
+	{
+		title = "Income per APC killed";
+		values[] = {1000,2000,3000,4000};
+		default = 1000;
+	};
+	class BaseRewardTank
+	{
+		title = "Income per Tank killed";
+		values[] = {3000,6000,9000,12000};
+		default = 3000;
+	};
+	class BaseRewardHeli
+	{
+		title = "Income per Helicopter killed";
+		values[] = {5000,10000,15000,20000};
+		default = 5000;
+	};
+	class SpacerWeather
+	{
+		title = "          === Environment Settings ===";
+		values[] = {0};
+		texts[] = {""};
+		default = 0;
+	};
+	#define WEATHER_DEFAULT	50
+	#include "\a3\functions_f\Params\paramWeather.hpp"
+	#define DAYTIMEPERIOD_DEFAULT 6
+	#include "\a3\functions_f\Params\paramDaytimePeriod.hpp"
+	class SpacerDebug
+	{
+		title = "          === Debug Console ===";
+		values[] = {0};
+		texts[] = {""};
+		default = 0;
+	};
+	#define DEBUGCONSOLE_DEFAULT 1
+	#include "\a3\functions_f\Params\paramDebugConsole.hpp"
+
 };
 
 // User Functions
@@ -79,7 +160,7 @@ class CfgSounds
 		// how the sound is referred to in the editor (e.g. trigger effects)
 		name = "headshot_dink";
 		// filename, volume, pitch
-		sound[] = {"media\headshotsound.ogg", 1, 1};
+		sound[] = {"media\headshotsound.ogg", db +0, 1, 1};
 		// subtitle delay in seconds, subtitle text
 		titles[] = {0,""};
 	};
@@ -156,40 +237,14 @@ class RscTitles
 //Clean up dead bodies
 corpseManagerMode = 1;
 corpseLimit = 0;
-corpseRemovalMinTime = 2;
-corpseRemovalMaxTime = 3;
+corpseRemovalMinTime = 0;
+corpseRemovalMaxTime = 1;
 
 //Clean up wrecks
 wreckManagerMode = 1;
-wreckLimit = 10;
+wreckLimit = 99;
 wreckRemovalMinTime = 300;
 wreckRemovalMaxTime = 301;
-
-
-author = "[TFD] JohnnyShootos"; 
-OnLoadName = "Last Stand"; 
-onLoadMission = "Hold out for as long as you can."; 
-//loadScreen =  "media\load.jpg";
-//skipLobby = 1;
-joinUnassigned = 0;
-disabledAI = 1;
-enableDebugConsole = 1;
-respawn = 3;
-respawnDelay = 5; // 9999999 = No Respawn. ANY other number lower than this will be the time in seconds until a respawn is allowed from the spectator script.
-respawnButton = 0;
-respawnOnStart = 1;
-
-//Revive Settings
-ReviveMode = 1;                         //0: disabled, 1: enabled, 2: controlled by player attributes
-ReviveUnconsciousStateMode = 1;         //0: basic, 1: advanced, 2: realistic
-ReviveRequiredTrait = 0;                //0: none, 1: medic trait is required
-ReviveRequiredItems = 2;                //0: none, 1: medkit, 2: medkit or first aid kit
-ReviveRequiredItemsFakConsumed = 1;     //0: first aid kit is not consumed upon revive, 1: first aid kit is consumed
-ReviveDelay = 6;                        //time needed to revive someone (in secs)
-ReviveMedicSpeedMultiplier = 2;         //speed multiplier for revive performed by medic
-ReviveForceRespawnDelay = 2;            //time needed to perform force respawn (in secs)
-ReviveBleedOutDelay = 120;              //unconscious state duration (in secs)
-
 
 //Rotorlib
 forceRotorLibSimulation = 0; // 0 = Client gets to choose what they want to use through their own options menu settings.

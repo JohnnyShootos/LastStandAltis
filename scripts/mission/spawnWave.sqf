@@ -10,20 +10,20 @@ _v = ["v1","v2","v3","v4","v5","v6","v7","v8","v9","v10","v11","v12","v13","v14"
 //Init Variables
 _difficulty = "GameDifficulty" call BIS_fnc_getParamValue;
 _players = count playableUnits;
-_forwardObserverProbabilityScore = random [0, 0.5, 1];
+_forwardObserverProbabilityScore = random 1;
 
 //Enemy Count Variables
-_infTotal = (_players + _w + 2) * _difficulty;
+_infTotal = (_players*_difficulty) + _w + 2;
 _infGroups =  round (_infTotal / 4);
-_vehicles = floor ( _w / 4 );
-_armedVehicles = floor ( _w / 10 );
-_tankVehicles = floor ( _w / 15 );
-_forwardObservers = ceil (_w / 4);
+_vehicles = (floor ( _w / 4 )) min 3;
+_armedVehicles = (floor ( _w / 6)) min 2;
+_tankVehicles = (floor ( _w / 15 )) min 1;
+_forwardObservers = ceil (_w / 10) min 3;
 
 //Enemy Difficulty Variables
-_aimAccuracy = (0.1 * _difficulty);
-_aimShake = (0.1 * _difficulty);
-_aimSpeed = (0.25 * _difficulty);
+_aimAccuracy = (0.20 * _difficulty);
+_aimShake = (0.20 * _difficulty);
+_aimSpeed = (0.20 * _difficulty);
 
 //Enemy Infantry Group Types
 _infTypes = ["BUS_ReconTeam", "BUS_InfTeam", "BUS_InfSquad", "BUS_SniperTeam"];
@@ -35,22 +35,23 @@ _vehTypes = ["B_G_Offroad_01_armed_F", "B_LSV_01_armed_F", "B_MRAP_01_hmg_F"];
 _armorVehTypes = ["B_MRAP_01_hmg_F","B_T_APC_Tracked_01_rcws_F","B_T_APC_Wheeled_01_cannon_F"];
 
 //Enemy Tank Types
-_tankTypes = ["B_MBT_01_TUSK_F"];
+_tankTypes = ["B_MBT_01_TUSK_F","B_MBT_01_TUSK_F","B_MBT_01_TUSK_F"];
 
 
 //Spawn infantry groups
 for "_n" from 1 to _infGroups do {
-	_z = _m call BIS_fnc_selectRandom;
-	systemChat format ["Selected Zone: %1", _z];
+	_safePos = [getMarkerPos "target", 100, 200, 4, 0, 0.5, 0] call BIS_fnc_findSafePos;
+	//_safePos = getMarkerPos (_m call BIS_fnc_selectRandom);
+	//systemChat format ["Selected Zone: %1", _z];
 	
 	_group = createGroup west;
 	if (_w > 20) then {
-		_group = [getMarkerPos _z, west, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> (_infTypes # 2)), [], [], [0.2,0.3], [], [], ([getMarkerpos "target", getMarkerPos _z] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;	
+		_group = [_safePos, west, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> (_infTypes # 2)), [], [], [0.2,0.3], [], [], ([_safePos, getMarkerPos "target"] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;	
 	} else {
 		if (_w > 10) then {
-			_group = [getMarkerPos _z, west, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> (_infTypes # 1)), [], [], [0.2,0.3], [], [], ([getMarkerpos "target", getMarkerPos _z] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;	
+			_group = [_safePos, west, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> (_infTypes # 1)), [], [], [0.2,0.3], [], [], ([_safePos, getMarkerPos "target"] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;	
 		} else {
-			_group = [getMarkerPos _z, west, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> (_infTypes # 0)), [], [], [0.2,0.3], [], [], ([getMarkerpos "target", getMarkerPos _z] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;
+			_group = [_safePos, west, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> (_infTypes # 0)), [], [], [0.2,0.3], [], [], ([_safePos, getMarkerPos "target"] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;
 		};
 	};
 	
@@ -58,16 +59,21 @@ for "_n" from 1 to _infGroups do {
 	
 	{
 		_x call TFD_fnc_addKilledEH;
-		_x setSkill ["aimingAccuracy", _aimAccuracy]; 
-		_x setSkill ["aimingShake", _aimShake];
-		_x setSkill ["aimingSpeed", _aimSpeed];
+		_x setSkill ["aimingAccuracy", (_aimAccuracy)]; 
+		_x setSkill ["aimingShake", (_aimShake)];
+		_x setSkill ["aimingSpeed", (_aimSpeed)];
+		_x setSkill ["endurance", 1];
+		_x setSkill ["reloadSpeed", 1];
+		_x setSkill ["commanding", 1];
+		_x setSkill ["spotDistance", 0.66];
+		_x setSkill ["spotTime", 0.66];
 		removeAllPrimaryWeaponItems _x;
 		removeAllHandgunItems _x;
-
-	
+		
 	} forEach units _group;
 		
 	_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
+	_group setBehaviourStrong "COMBAT";
 	systemChat format ["New Group: %1, is attacking: %2", _group, _order];
 	
 	sleep 1;
@@ -76,20 +82,17 @@ for "_n" from 1 to _infGroups do {
 //Spawn Vehicles 
 for "_n" from 1 to _vehicles do { 
 
-	_z = _v call BIS_fnc_selectRandom;
-	systemChat format ["Selected Zone: %1", _z];
-
-	_safePos = [getMarkerPos _z, 0, 15, 3, 0, 0.5] call BIS_fnc_findSafePos;
+	_safePos = [getMarkerPos "target", 300, 500, 10, 0, 0.5, 0] call BIS_fnc_findSafePos;
 	
 	_group = createGroup west;
 	_vehGrp = [];
 	if (_w > 20) then {
-		_vehGrp = [_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 2), _group] call bis_fnc_spawnvehicle;	
+		_vehGrp = [_safePos, ([_safePos, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 2), _group] call bis_fnc_spawnvehicle;	
 	} else {
 		if (_w > 10) then {
-			_vehGrp = [_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 1), _group] call bis_fnc_spawnvehicle;	
+			_vehGrp = [_safePos, ([_safePos, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 1), _group] call bis_fnc_spawnvehicle;	
 		} else {
-			_vehGrp = [_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 0), _group] call bis_fnc_spawnvehicle;
+			_vehGrp = [_safePos, ([_safePos, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 0), _group] call bis_fnc_spawnvehicle;
 		};
 	};
 	
@@ -100,6 +103,9 @@ for "_n" from 1 to _vehicles do {
 		_x setSkill ["aimingAccuracy", _aimAccuracy]; 
 		_x setSkill ["aimingShake", _aimShake];
 		_x setSkill ["aimingSpeed", _aimSpeed];
+		_x setSkill ["endurance", 1];
+		_x setSkill ["reloadSpeed", 1];
+		_x setSkill ["commanding", 1];
 		removeAllPrimaryWeaponItems _x;
 		removeAllHandgunItems _x;
 	} forEach (_vehGrp # 1);
@@ -107,6 +113,7 @@ for "_n" from 1 to _vehicles do {
 	(_vehGrp # 0) call TFD_fnc_addKilledEH;
 	
 	_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
+	_group setBehaviourStrong "COMBAT";
 	systemChat format ["New Group: %1, is attacking: %2", _group, _order];
 	
 	
@@ -117,19 +124,17 @@ for "_n" from 1 to _vehicles do {
 //Spawn Enclosed Fighting Vehicles
 for "_n" from 1 to _armedVehicles do { 
 
-	_z = _v call BIS_fnc_selectRandom;
-	systemChat format ["Selected Zone: %1", _z];
-
-	_safePos = [getMarkerPos _z, 0, 15, 3, 0, 0.5] call BIS_fnc_findSafePos;
+	_safePos = [getMarkerPos "target", 300, 500, 10, 0, 0.5, 0] call BIS_fnc_findSafePos;
 	
 	_group = createGroup west;
+	_vehGrp = [];
 	if (_w > 20) then {
-		_vehGrp = [_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 2), _group] call bis_fnc_spawnvehicle;	
+		_vehGrp = [_safePos, ([_safePos, getMarkerpos "target"] call BIS_fnc_dirTo), (_armorVehTypes # 2), _group] call bis_fnc_spawnvehicle;	
 	} else {
 		if (_w > 10) then {
-			_vehGrp = [_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 1), _group] call bis_fnc_spawnvehicle;	
+			_vehGrp = [_safePos, ([_safePos, getMarkerpos "target"] call BIS_fnc_dirTo), (_armorVehTypes # 1), _group] call bis_fnc_spawnvehicle;	
 		} else {
-			_vehGrp = [_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 0), _group] call bis_fnc_spawnvehicle;
+			_vehGrp = [_safePos, ([_safePos, getMarkerpos "target"] call BIS_fnc_dirTo), (_armorVehTypes # 0), _group] call bis_fnc_spawnvehicle;
 		};
 	};
 	
@@ -140,6 +145,9 @@ for "_n" from 1 to _armedVehicles do {
 		_x setSkill ["aimingAccuracy", _aimAccuracy]; 
 		_x setSkill ["aimingShake", _aimShake];
 		_x setSkill ["aimingSpeed", _aimSpeed];
+		_x setSkill ["endurance", 1];
+		_x setSkill ["reloadSpeed", 1];
+		_x setSkill ["commanding", 1];
 		removeAllPrimaryWeaponItems _x;
 		removeAllHandgunItems _x;
 	} forEach (_vehGrp # 1);
@@ -147,6 +155,7 @@ for "_n" from 1 to _armedVehicles do {
 	(_vehGrp # 0) call TFD_fnc_addKilledEH;
 	
 	_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
+	_group setBehaviourStrong "COMBAT";
 	systemChat format ["New Group: %1, is attacking: %2", _group, _order];
 	
 	
@@ -157,19 +166,17 @@ for "_n" from 1 to _armedVehicles do {
 //Spawn Armor
 for "_n" from 1 to _tankVehicles do { 
 
-	_z = _v call BIS_fnc_selectRandom;
-	systemChat format ["Selected Zone: %1", _z];
-
-	_safePos = [getMarkerPos _z, 0, 15, 3, 0, 0.5] call BIS_fnc_findSafePos;
+	_safePos = [getMarkerPos "target", 300, 500, 10, 0, 0.5, 0] call BIS_fnc_findSafePos;
 	
 	_group = createGroup west;
+	_vehGrp = [];
 	if (_w > 20) then {
-		_vehGrp = [_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 2), _group] call bis_fnc_spawnvehicle;	
+		_vehGrp = [_safePos, ([_safePos, getMarkerpos "target"] call BIS_fnc_dirTo), (_tankTypes # 2), _group] call bis_fnc_spawnvehicle;	
 	} else {
 		if (_w > 10) then {
-			_vehGrp = [_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 1), _group] call bis_fnc_spawnvehicle;	
+			_vehGrp = [_safePos, ([_safePos, getMarkerpos "target"] call BIS_fnc_dirTo), (_tankTypes # 1), _group] call bis_fnc_spawnvehicle;	
 		} else {
-			_vehGrp = [_safePos, ([getMarkerPos _z, getMarkerpos "target"] call BIS_fnc_dirTo), (_vehTypes # 0), _group] call bis_fnc_spawnvehicle;
+			_vehGrp = [_safePos, ([_safePos, getMarkerpos "target"] call BIS_fnc_dirTo), (_tankTypes # 0), _group] call bis_fnc_spawnvehicle;
 		};
 	};
 	
@@ -180,6 +187,9 @@ for "_n" from 1 to _tankVehicles do {
 		_x setSkill ["aimingAccuracy", _aimAccuracy]; 
 		_x setSkill ["aimingShake", _aimShake];
 		_x setSkill ["aimingSpeed", _aimSpeed];
+		_x setSkill ["endurance", 1];
+		_x setSkill ["reloadSpeed", 1];
+		_x setSkill ["commanding", 1];
 		removeAllPrimaryWeaponItems _x;
 		removeAllHandgunItems _x;
 	} forEach (_vehGrp # 1);
@@ -187,6 +197,7 @@ for "_n" from 1 to _tankVehicles do {
 	(_vehGrp # 0) call TFD_fnc_addKilledEH;
 	
 	_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
+	_group setBehaviourStrong "COMBAT";
 	systemChat format ["New Group: %1, is attacking: %2", _group, _order];
 	
 	
@@ -197,27 +208,33 @@ for "_n" from 1 to _tankVehicles do {
 //Spawn forward observer / sniper group
 if (_forwardObserverProbabilityScore < (0.25*_difficulty)) then {
 	for "_n" from 1 to _forwardObservers do {
-		_z = _m call BIS_fnc_selectRandom;
-		systemChat format ["Selected Zone: %1", _z];
+		_safePos = [getMarkerPos "target", 200, 300, 4, 0, 0.5, 0] call BIS_fnc_findSafePos;
+		//_z = _m call BIS_fnc_selectRandom;
+		//systemChat format ["Selected Zone: %1", _z];
 		
 		_group = createGroup west;
 		
-		_group = [getMarkerPos _z, west, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> (_infTypes # 3)), [], [], [0.2,0.3], [], [], ([getMarkerpos "target", getMarkerPos _z] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;	
+		_group = [_safePos, west, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> (_infTypes # 3)), [], [], [0.2,0.3], [], [], ([_safePos, getMarkerpos "target"] call BIS_fnc_dirTo)] call BIS_fnc_spawnGroup;	
 				
 		_group allowFleeing 0;
 		
 		{
 			_x call TFD_fnc_addKilledEH;
-			_x setSkill ["aimingAccuracy", (_aimAccuracy*2 min 1)]; 
-			_x setSkill ["aimingShake", (_aimShake*2 min 1)];
-			_x setSkill ["aimingSpeed", (_aimSpeed*2 min 1)];
-
+			_x setSkill ["aimingAccuracy", ((_aimAccuracy*4) min 1)]; 
+			_x setSkill ["aimingShake", ((_aimShake*4) min 1)];
+			_x setSkill ["aimingSpeed", ((_aimSpeed*4) min 1)];
+			_x setSkill ["endurance", 1];
+			_x setSkill ["reloadSpeed", 1];
+			_x setSkill ["commanding", 1];
+			_x setSkill ["spotDistance", 1];
+			_x setSkill ["spotTime", 1];
 		
 		} forEach units _group;
 		
 
 		_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
 		systemChat format ["New Group: %1, is attacking: %2", _group, _order];
+		_group setBehaviourStrong "COMBAT";
 		
 		_group spawn TFD_fnc_forwardObserverArtillery;
 
