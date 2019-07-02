@@ -10,6 +10,7 @@ lbClear _ctrl;
 		_ctrl lbAdd getText (configFile >> "CfgWeapons" >> configName _x >> "displayName");
 		_ctrl lbSetPicture [_foreachindex, gettext (configFile >> "CfgWeapons" >> configName _x >> "picture")];
 		_ctrl lbSetPictureColor [_foreachindex, [1, 1, 1, 1]];
+		_ctrl lbSetPictureColorSelected [_foreachindex, [1, 1, 1, 1]];
 		_ctrl lbSetTooltip [_foreachindex, format ["$%1", getNumber (_x >> "cost")]];
 		_ctrl lbSetData [_foreachindex, configName _x];
 	};

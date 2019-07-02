@@ -19,4 +19,4 @@ _array = [];
 
 } foreach ("isClass _x" configClasses (missionconfigfile >> "ShopList"));
 
-_array;
+_array

@@ -116,6 +116,18 @@ class ShopList {
 				cost = 50;
 				itemtype = "magazine";
 		};
+		class 30Rnd_65x39_caseless_mag {
+				cost = 100;
+				itemtype = "magazine";
+		};
+		class 30Rnd_65x39_caseless_mag_Tracer {
+				cost = 100;
+				itemtype = "magazine";
+		};
+		class 100Rnd_65x39_caseless_mag {
+				cost = 300;
+				itemtype = "magazine";
+		};
 		class 30Rnd_762x39_AK12_Mag_F {
 				cost = 75;
 				itemtype = "magazine";
@@ -140,12 +152,24 @@ class ShopList {
 				cost = 250;
 				itemtype = "magazine";
 		};
+		class NLAW_F {
+				cost = 250;
+				itemtype = "magazine";
+		};
 		class Titan_AT { 
 				cost = 500;
 				itemtype = "magazine";
 		};
 		class Titan_AA { 
 				cost = 500;
+				itemtype = "magazine";
+		};
+		class Chemlight_red {
+				cost = 10;
+				itemtype = "magazine";
+		};
+		class Chemlight_green {
+				cost = 10;
 				itemtype = "magazine";
 		};
 		class MiniGrenade {
@@ -160,22 +184,6 @@ class ShopList {
 				cost = 25;
 				itemtype = "magazine";
 		};
-		class APERSTripMine_Wire_Mag { 
-			cost = 100;
-			itemtype = "magazine";
-		};
-		class APERSBoundingMine_Range_Mag { 
-			cost = 150;
-			itemtype = "magazine";
-		};
-		class ATMine_Range_Mag { 
-			cost = 200;
-			itemtype = "magazine";
-		};
-		class Laserbatteries {
-			cost = 0;
-			itemtype = "magazine";
-		};
 		class SmokeShellGreen {
 				cost = 50;
 				itemtype = "magazine";
@@ -188,12 +196,8 @@ class ShopList {
 				cost = 50;
 				itemtype = "magazine";
 		};
-		class Chemlight_red {
-				cost = 10;
-				itemtype = "magazine";
-		};
-		class Chemlight_green {
-				cost = 10;
+		class B_IR_Grenade {
+				cost = 100;
 				itemtype = "magazine";
 		};
 		class 1Rnd_HE_Grenade_shell {
@@ -216,25 +220,21 @@ class ShopList {
 				cost = 50;
 				itemtype = "magazine";
 		};
-		class 30Rnd_65x39_caseless_mag {
-				cost = 100;
-				itemtype = "magazine";
+		class APERSTripMine_Wire_Mag { 
+			cost = 100;
+			itemtype = "magazine";
 		};
-		class 30Rnd_65x39_caseless_mag_Tracer {
-				cost = 100;
-				itemtype = "magazine";
+		class APERSBoundingMine_Range_Mag { 
+			cost = 150;
+			itemtype = "magazine";
 		};
-		class 100Rnd_65x39_caseless_mag {
-				cost = 300;
-				itemtype = "magazine";
+		class ATMine_Range_Mag { 
+			cost = 200;
+			itemtype = "magazine";
 		};
-		class NLAW_F {
-				cost = 250;
-				itemtype = "magazine";
-		};
-		class B_IR_Grenade {
-				cost = 100;
-				itemtype = "magazine";
+		class Laserbatteries {
+			cost = 0;
+			itemtype = "magazine";
 		};
 	};
 	class EquipList {
@@ -274,6 +274,10 @@ class ShopList {
 			cost = 400;
 			itemtype = "backpack";
 		};
+		class NVGoggles_INDEP {
+			cost = 1000;
+			itemtype = "linkitem";
+		};
 		class Laserdesignator {
 			cost = 250;
 			itemtype = "rangefinder";
@@ -305,10 +309,6 @@ class ShopList {
 		class optic_Nightstalker {
 			cost = 5000;
 			itemtype = "optic";
-		};
-		class NVGoggles_INDEP {
-			cost = 1000;
-			itemtype = "linkitem";
 		};
 		class acc_flashlight {
 			cost = 100;

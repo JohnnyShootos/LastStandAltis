@@ -17,7 +17,7 @@ class TFD_Shop_Guns
 			y = 0.349537 * safezoneH + safezoneY;
 			w = 0.193912 * safezoneW;
 			h = 0.291522 * safezoneH;
-			colorBackground[] = {0,0,0,0.5};
+			colorBackground[] = {0,0,0,0.9};
 		};
 		class LS_MenuButton_0: l_RscButton
 		{
@@ -28,7 +28,7 @@ class TFD_Shop_Guns
 			w = 0.0572922 * safezoneW;
 			h = 0.0282118 * safezoneH;
 			colorText[] = {1,1,1,1};
-			colorBackground[] = {0,0,1,0.5};
+			colorBackground[] = {0,0,1,0.75};
 			onButtonClick = "[] execVM ""functions\gui\shop\listGuns.sqf"" "
 		};
 		class LS_MenuButton_1: l_RscButton
@@ -40,7 +40,7 @@ class TFD_Shop_Guns
 			w = 0.0572922 * safezoneW;
 			h = 0.0282118 * safezoneH;
 			colorText[] = {1,1,1,1};
-			colorBackground[] = {0,0,1,0.5};
+			colorBackground[] = {0,0,1,0.75};
 			onButtonClick = "[_this] execVM ""functions\gui\shop\listAmmo.sqf"" "
 		};
 		class LS_MenuButton_2: l_RscButton
@@ -52,7 +52,7 @@ class TFD_Shop_Guns
 			w = 0.0572922 * safezoneW;
 			h = 0.0282118 * safezoneH;
 			colorText[] = {1,1,1,1};
-			colorBackground[] = {0,0,1,0.5};
+			colorBackground[] = {0,0,1,0.75};
 			onButtonClick = "[_this] execVM ""functions\gui\shop\listEquip.sqf"" "
 		};
 		class LS_ListBox: l_RscListbox
@@ -62,7 +62,7 @@ class TFD_Shop_Guns
 			y = 0.405961 * safezoneH + safezoneY;
 			w = 0.123399 * safezoneW;
 			h = 0.225694 * safezoneH;
-			colorBackground[] = {0,0,0,0.75};
+			colorBackground[] = {1,1,1,0.1};
 			
 		};
 		class LS_Thumb: l_RscText
@@ -72,7 +72,7 @@ class TFD_Shop_Guns
 			y = 0.405961 * safezoneH + safezoneY;
 			w = 0.0572922 * safezoneW;
 			h = 0.0470196 * safezoneH;
-			colorBackground[] = {0,0,0,0.5};
+			colorBackground[] = {1,1,1,0.1};
 			colorText[] = {1,1,1,1};
 			sizeEx = 0.05;
 			text = ""
@@ -86,7 +86,7 @@ class TFD_Shop_Guns
 			w = 0.0572922 * safezoneW;
 			h = 0.0282118 * safezoneH;
 			colorText[] = {1,1,1,1};
-			colorBackground[] = {0,0,1,0.5};
+			colorBackground[] = {1,0,0,0.75};
 			action = "closeDialog 0;"
 		};
 		////////////////////////////////////////////////////////
