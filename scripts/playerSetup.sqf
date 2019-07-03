@@ -1,6 +1,6 @@
 player enableFatigue false;
 
-[] execVM "functions\gui\hud\playerHud.sqf";
+[] execVM "functions\gui\hud\ls_hud.sqf";
 
 // Give Admins the Panel of Doom:
 _admins = [

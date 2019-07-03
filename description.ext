@@ -170,7 +170,8 @@ class CfgSounds
 //Hud
 class RscTitles
 {
-	#include "functions\gui\hud\hud.hpp"
+	//#include "functions\gui\hud\hud.hpp"
+	#include "functions\gui\hud\ls_hud.hpp"
 	class cod_hitmarker 
 	{
 		idd = -1;
