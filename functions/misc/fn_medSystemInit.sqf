@@ -53,8 +53,7 @@ JSH_MEDCASE_DEPLOY_ACTION = player addAction ["<t color='#dd0000'>Deploy Med Sup
 		_pos = _unit getPos [1,(direction _unit)];
 		_posFixed = [(_pos # 0), (_pos # 1), ((getPosATL _unit) # 2)];
 		_case = createVehicle [_caseType, _posFixed, [], 0, "CAN_COLLIDE"];
-		//_case setPosATL getPosWorld _unit;
-		//_case setVehiclePosition [_position, [], 0, "CAN_COLLIDE"];
+		[_case,[getdir _unit,-90,0]] call BIS_fnc_setObjectRotation;
 		_unit removeItem "Medikit";
 		
 		//Cleanup the case after 5 mins if still deployed
@@ -104,7 +103,7 @@ JSH_MEDCASE_DEPLOY_ACTION = player addAction ["<t color='#dd0000'>Deploy Med Sup
 			false 
 		] remoteExec ["bis_fnc_holdActionAdd", 0, true];
 	},
-	["Land_PlasticCase_01_small_F"],
+	["Land_FirstAidKit_01_closed_F"],
 	-998,
 	false,
 	true,

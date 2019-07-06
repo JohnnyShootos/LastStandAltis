@@ -74,6 +74,41 @@ class Params
 		texts[] = {"Easy","Normal","Veteran","Nightmare"};
 		default = 1;
 	};
+	class SpacerPresence
+	{
+		title = "          === Enemy Presence Settings ===";
+		values[] = {0};
+		texts[] = {""};
+		default = 0;
+	};
+	class VehiclePresent
+	{
+		title = "Chance of Vehicle Spawn";
+		values[] = {25,50,75,100};
+		texts[] = {"25%","50%","75%","100%"};
+		default = 25;
+	};
+	class IFVPresent
+	{
+		title = "Chance of IFV Spawn";
+		values[] = {25,50,75,100};
+		texts[] = {"25%","50%","75%","100%"};
+		default = 25;
+	};
+	class TankPresent
+	{
+		title = "Chance of Tank Spawn";
+		values[] = {25,50,75,100};
+		texts[] = {"25%","50%","75%","100%"};
+		default = 25;
+	};
+	class SniperPresent
+	{
+		title = "Chance of Sniper Team Spawn";
+		values[] = {25,50,75,100};
+		texts[] = {"25%","50%","75%","100%"};
+		default = 25;
+	};
 	class SpacerMission
 	{
 		title = "          === Income Settings ===";

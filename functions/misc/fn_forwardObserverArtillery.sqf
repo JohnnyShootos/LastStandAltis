@@ -36,7 +36,7 @@ while {ALIVECHECK(_group)} do {
 
 	_bomb = _roundType createVehicle _mortarPos;
 	[_bomb, -90, 0] call BIS_fnc_setPitchBank;
-   	_bomb setVelocity [0,0,-50];
+   	_bomb setVelocity [0,0,-25];
 
 	//systemChat "Mortar Fired";
    	
