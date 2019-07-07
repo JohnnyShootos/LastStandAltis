@@ -52,11 +52,6 @@ if (isNil "JSH_EH_handleHeal") then {
 		["",2,player] call bis_fnc_reviveOnState;
 		player setVariable ["#rev", 2, true];
 		player setVariable ['jsh_health', 0.99, true];
-		//Launch small loop to detect when a player is revived and set health back to 75%
-		[] spawn {
-			waitUntil {lifeState player != "INCAPACITATED"};
-			player setVariable ['jsh_health', 0.25, true];
-		};
 	}; 
 }] call BIS_fnc_addStackedEventHandler;
 

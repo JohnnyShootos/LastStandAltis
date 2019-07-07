@@ -16,7 +16,7 @@ disabledAI = 1;
 enableDebugConsole = 1;
 respawn = 3;
 respawnDialog = 0;
-respawnDelay = 5; // 9999999 = No Respawn. ANY other number lower than this will be the time in seconds until a respawn is allowed from the spectator script.
+respawnDelay = 3; // 9999999 = No Respawn. ANY other number lower than this will be the time in seconds until a respawn is allowed from the spectator script.
 respawnButton = 0;
 respawnOnStart = 1;
 
@@ -24,8 +24,8 @@ respawnOnStart = 1;
 ReviveMode = 1;                         //0: disabled, 1: enabled, 2: controlled by player attributes
 ReviveUnconsciousStateMode = 0;         //0: basic, 1: advanced, 2: realistic
 ReviveRequiredTrait = 0;                //0: none, 1: medic trait is required
-ReviveRequiredItems = 2;                //0: none, 1: medkit, 2: medkit or first aid kit
-ReviveRequiredItemsFakConsumed = 1;     //0: first aid kit is not consumed upon revive, 1: first aid kit is consumed
+ReviveRequiredItems = 0;                //0: none, 1: medkit, 2: medkit or first aid kit
+ReviveRequiredItemsFakConsumed = 0;     //0: first aid kit is not consumed upon revive, 1: first aid kit is consumed
 ReviveDelay = 6;                        //time needed to revive someone (in secs)
 ReviveMedicSpeedMultiplier = 2;         //speed multiplier for revive performed by medic
 ReviveForceRespawnDelay = 2;            //time needed to perform force respawn (in secs)
@@ -120,13 +120,13 @@ class Params
 	{
 		title = "Income per Infantry killed";
 		values[] = {50,100,150,200};
-		default = 50;
+		default = 100;
 	};
 	class BaseRewardCar
 	{
 		title = "Income per Car killed";
 		values[] = {250,500,750,1000};
-		default = 250;
+		default = 500;
 	};
 	class BaseRewardAPC
 	{
@@ -173,7 +173,6 @@ class Params
 class CfgFunctions
 {
 	#include "functions\TFD.hpp"
-	#include "CHVD\CfgFunctions.hpp"
 	#include "adminpanelmk2\functions\APMK2.hpp"
 };
 
@@ -186,7 +185,7 @@ class CfgSounds
 		// how the sound is referred to in the editor (e.g. trigger effects)
 		name = "cod_hitmarker";
 		// filename, volume, pitch
-		sound[] = {"media\hitsound.ogg", db +20, 1, 1};
+		sound[] = {"media\hitsound.ogg", db +10, 1, 1};
 		// subtitle delay in seconds, subtitle text
 		titles[] = {0,""};
 	};
@@ -195,7 +194,7 @@ class CfgSounds
 		// how the sound is referred to in the editor (e.g. trigger effects)
 		name = "headshot_dink";
 		// filename, volume, pitch
-		sound[] = {"media\headshotsound.ogg", db +0, 1, 1};
+		sound[] = {"media\headshotsound.ogg", db -10, 1, 1};
 		// subtitle delay in seconds, subtitle text
 		titles[] = {0,""};
 	};
@@ -205,7 +204,6 @@ class CfgSounds
 //Hud
 class RscTitles
 {
-	//#include "functions\gui\hud\hud.hpp"
 	#include "functions\gui\hud\ls_hud.hpp"
 	class cod_hitmarker 
 	{
@@ -219,7 +217,7 @@ class RscTitles
 			class hitmarker
 			{
 				idc = 1200;
-				text = "media\hitmarker.paa";
+				text = "\A3\ui_f\data\igui\cfg\weaponcursors\rocket_gs.paa";
 				x = 0.491186 * safezoneW + safezoneX;
 				y = 0.480596 * safezoneH + safezoneY;
 				w = 0.0176284 * safezoneW;
@@ -233,7 +231,7 @@ class RscTitles
 				type = 0;
 				style = 48;
 				font = "TahomaB";
-				sizeEx = 0;
+				sizeEx = 2;
 				lineSpacing = 0;
 				fixedWidth = 0;
 				shadow = 0;
@@ -247,7 +245,7 @@ class RscTitles
 			class hitmarker 
 			{
 				idc = 1201;
-				text = "media\hitmarker.paa";
+				text = "\A3\ui_f\data\igui\cfg\weaponcursors\rocket_gs.paa";
 				x = 0.491186 * safezoneW + safezoneX;
 				y = 0.480596 * safezoneH + safezoneY;
 				w = 0.0176284 * safezoneW;
@@ -261,7 +259,7 @@ class RscTitles
 				type = 0;
 				style = 48;
 				font = "TahomaB";
-				sizeEx = 0;
+				sizeEx = 2;
 				lineSpacing = 0;
 				fixedWidth = 0;
 				shadow = 0;
@@ -291,7 +289,4 @@ forceRotorLibSimulation = 0; // 0 = Client gets to choose what they want to use 
 // Shop Defines
 #include "functions\gui\shop\dialogs.hpp"
 #include "functions\gui\shop\inventory.hpp"
-
-//View Distance Defines
-#include "CHVD\dialog.hpp"
 

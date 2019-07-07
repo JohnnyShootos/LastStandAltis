@@ -6,9 +6,9 @@ class ShopList {
 				cost = 100;
 				itemtype = "handgun";
 		};
-		class hgun_PDW2000_F {
-				cost = 200;
-				itemtype = "weapon";
+		class hgun_Pistol_heavy_02_F {
+				cost = 150;
+				itemtype = "handgun";
 		};
 		class SMG_05_F {
 				cost = 200;
@@ -97,10 +97,10 @@ class ShopList {
 				itemtype = "magazine";
 		};
 		class 16Rnd_9x21_Mag {
-				cost = 15;
+				cost = 10;
 				itemtype = "magazine";
 		};
-		class 30Rnd_9x21_Mag {
+		class 6Rnd_45ACP_Cylinder {
 				cost = 25;
 				itemtype = "magazine";
 		};
@@ -239,7 +239,7 @@ class ShopList {
 	};
 	class EquipList {
 		class FirstAidKit {
-			cost = 100;
+			cost = 50;
 			itemtype = "item";
 		};
 		class Medikit {
@@ -273,6 +273,10 @@ class ShopList {
 		class B_Carryall_oli {
 			cost = 400;
 			itemtype = "backpack";
+		};
+		class Toolkit {
+			cost = 4000;
+			itemtype = "item";
 		};
 		class NVGoggles_INDEP {
 			cost = 1000;

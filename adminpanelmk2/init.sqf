@@ -1,5 +1,4 @@
 //Admin Panel Init
-if (isServer || isDedicated) then {[] call APMK2_fnc_getPlayerList};
 
 //Set Admin List
 #include "ADMINLIST.hpp";

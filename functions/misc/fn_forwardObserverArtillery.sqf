@@ -11,7 +11,7 @@ sleep 5;
 while {ALIVECHECK(_group)} do {
 	_rofMin = 20;
 	_rofMax = 60;
-	sleep random [_rofMin, (_rofMax - _rofMin), _rofMax];
+	
 	//gethered intel variable
 	_intel = 0;
 	_target = objNull;
@@ -29,16 +29,15 @@ while {ALIVECHECK(_group)} do {
 
 	//start raining down mortar shells on players
 	if !(ALIVECHECK(_group)) exitWith {};
+	sleep random [_rofMin, (_rofMax - _rofMin), _rofMax];
 	_roundType = "Sh_82mm_AMOS";
 	_strikeTarget = getPosATL _target;
 	_dispersion = 20;
-	_mortarPos = [(_strikeTarget select 0) - _dispersion*sin(random 360),(_strikeTarget select 1) - _dispersion*cos(random 360),500];
+	_mortarPos = [(_strikeTarget select 0) - _dispersion*sin(random 360),(_strikeTarget select 1) - _dispersion*cos(random 360),100];
 
 	_bomb = _roundType createVehicle _mortarPos;
 	[_bomb, -90, 0] call BIS_fnc_setPitchBank;
-   	_bomb setVelocity [0,0,-25];
-
-	//systemChat "Mortar Fired";
+   	_bomb setVelocity [0,0,-10];
    	
 
 };

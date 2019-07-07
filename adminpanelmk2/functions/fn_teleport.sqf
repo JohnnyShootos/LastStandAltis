@@ -3,54 +3,53 @@ disableSerialization;
 _ctrl = (findDisplay 6969) displayCtrl IDC_ADMINPANELMK2_JSH_GUI_ADMIN_LISTBOX;
 _data = _ctrl lbValue lbCurSel _ctrl;
 _name = _ctrl lbData lbCurSel _ctrl;
-_target = _name call {
+_getTarget = [_name,_data] call {
+    params ["_name","_data"];
+    _target = objNull;
     {
-        params ["_name"];
-        _unit = objNull;
         if (_name == (_x select 0)) then {
-            _unit = (_x select 2);
+            if (_data == (_x select 1)) then {
+                    _target = (_x select 2);
+            };
         };
-
     } forEach JSH_ADMIN_PLAYERLIST_DATA;
-    _unit
+    _target
 };
-
-systemChat str _target;
+systemChat str _getTarget;
+waitUntil {!isNull _getTarget};
 _shiftKey = _this select 4;
 _ctrlKey = _this select 5;
 _altKey = _this select 6;
 
 //systemChat str [_ctrlKey,_shiftKey,_altKey];
 if (_ctrlKey) then {
+
     if (_ctrlKey && _altKey) then {
         //TP them to you
-        _safePos = [(getPos vehicle player), 1, 5, 1, 1, 1, 0] call BIS_fnc_findSafePos;
+        [_name,_getTarget] spawn {
 
-        if (_name != name player) then {
+            params ["_name", "_target"];
+            
+            _safePos = [(getPosATL vehicle player), 1, 10, 1, 1, 1, 0] call BIS_fnc_findSafePos;
 
-            if ((typeOf vehicle _target) isKindOf "Man") then {
-                
-                _target setPos _safePos;
-
-            } else {
-                [_target, false] remoteExecCall ["allowDamage", 0];
-                moveOut _target;
-                sleep 0.5;
-                _target setPos _safePos;
-                [_target, true] remoteExecCall ["allowDamage", 0];
-
+            if (_name != name player) then {
+                if ((typeOf vehicle _target) isKindOf "Man") then {
+                    _target setPos _safePos;
+                } else {
+                    moveOut _target;
+                    sleep 1;
+                    _target setPos _safePos;
+                };            
             };
         };
-
     } else {
-
         //TP you to them
-        _safePos = [(getPos _target), 1, 5, 1, 1, 1, 0] call BIS_fnc_findSafePos;
+        _safePos = [(getPosATL vehicle _target), 1, 10, 1, 1, 1, 0] call BIS_fnc_findSafePos;
 
         if (_name != name player) then {
             player setPos _safePos;
         };
-
+    
     };
 } else {
     _check = player getVariable ["jsh_adminTeleport", false];

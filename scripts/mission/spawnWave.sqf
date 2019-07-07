@@ -77,7 +77,7 @@ for "_n" from 1 to _infGroups do {
 		_x setSkill ["spotTime", 0.66];
 		removeAllPrimaryWeaponItems _x;
 		removeAllHandgunItems _x;
-		
+		_x spawn { while {alive _this} do { sleep 1; _this setVehicleAmmoDef 1;}};
 	} forEach units _group;
 		
 	_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
@@ -117,9 +117,11 @@ for "_n" from 1 to _vehicles do {
 			_x setSkill ["commanding", 1];
 			removeAllPrimaryWeaponItems _x;
 			removeAllHandgunItems _x;
+			_x spawn { while {alive _this} do { sleep 1; _this setVehicleAmmoDef 1;}};
 		} forEach (_vehGrp # 1);
 
 		(_vehGrp # 0) call TFD_fnc_addKilledEH;
+		(_vehGrp # 0) spawn { while {alive _this} do { sleep 1; _this setVehicleAmmoDef 1;}};
 		
 		_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
 		_group setBehaviourStrong "COMBAT";
@@ -161,9 +163,11 @@ for "_n" from 1 to _armedVehicles do {
 			_x setSkill ["commanding", 1];
 			removeAllPrimaryWeaponItems _x;
 			removeAllHandgunItems _x;
+			_x spawn { while {alive _this} do { sleep 1; _this setVehicleAmmoDef 1;}};
 		} forEach (_vehGrp # 1);
 
 		(_vehGrp # 0) call TFD_fnc_addKilledEH;
+		(_vehGrp # 0) spawn { while {alive _this} do { sleep 1; _this setVehicleAmmoDef 1;}};
 		
 		_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
 		_group setBehaviourStrong "COMBAT";
@@ -205,9 +209,11 @@ for "_n" from 1 to _tankVehicles do {
 			_x setSkill ["commanding", 1];
 			removeAllPrimaryWeaponItems _x;
 			removeAllHandgunItems _x;
+			_x spawn { while {alive _this} do { sleep 1; _this setVehicleAmmoDef 1;}};
 		} forEach (_vehGrp # 1);
 
 		(_vehGrp # 0) call TFD_fnc_addKilledEH;
+		(_vehGrp # 0) spawn { while {alive _this} do { sleep 1; _this setVehicleAmmoDef 1;}};
 		
 		_order = [_group, "target" call BIS_fnc_randomPosTrigger] call BIS_fnc_taskAttack;
 		_group setBehaviourStrong "COMBAT";
@@ -245,6 +251,7 @@ for "_n" from 1 to _forwardObservers do {
 			_x setSkill ["commanding", 1];
 			_x setSkill ["spotDistance", 1];
 			_x setSkill ["spotTime", 1];
+			_x spawn { while {alive _this} do { sleep 1; _this setVehicleAmmoDef 1;}};
 		
 		} forEach units _group;
 		

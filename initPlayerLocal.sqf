@@ -1,3 +1,8 @@
+setObjectViewDistance 1000;
+setViewDistance 1000;
+setTerrainGrid 50;
+
+
 waitUntil { sleep 1; time > 1 };
 
 STARTING_CASH = "StartCash" call BIS_fnc_getParamValue;
@@ -29,3 +34,15 @@ STARTING_CASH = "StartCash" call BIS_fnc_getParamValue;
 
 AWARD = [STARTING_CASH, player];
 publicVariableServer "AWARD";
+
+["last3Units", "onEachFrame", 
+{
+	_cEnemy = ({alive _x && (side _x == west)} count allUnits);
+	if (_cEnemy <= 3 && _cEnemy >= 1) then {
+		{
+			if (alive _x && side _x == west) then {
+				drawIcon3D ["\A3\Ui_f\data\IGUI\Cfg\TacticalPing\TacticalPingDefault_ca.paa", [1,1,0,1], ASLToAGL getPosASL _x, 1, 1, 0];
+			};
+		} forEach allUnits;
+	};
+}] call BIS_fnc_addStackedEventHandler;

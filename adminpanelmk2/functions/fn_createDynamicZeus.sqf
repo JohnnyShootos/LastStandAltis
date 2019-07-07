@@ -4,7 +4,7 @@ Creates a dynamic Zeus Module.
 This code must be either run on the server machine or remoteExec from a client & targeting the server machine.
 
 Syntax:
-	[params] call TFD_fnc_createDynamicZeus
+	[params] call 
 
 Parameters:
 
@@ -21,8 +21,8 @@ Example:
 
 params ["_player","_owner","_curatorGroup"];	
 
-//Prevent spawning unecessary curators
-if ((getAssignedCuratorLogic _player) isEqualTo objNull) then {
+	//Prevent spawning unecessary curators
+	if ((getAssignedCuratorLogic _player) isEqualTo objNull) then {
 
 	//Spawn and configure the zeus
 	_curatorModule = _curatorGroup createunit ["ModuleCurator_F", [0, 90, 90], [], 0.5, "NONE"];
@@ -36,6 +36,12 @@ if ((getAssignedCuratorLogic _player) isEqualTo objNull) then {
 	_curatorModule addeventhandler ["curatorGroupDoubleClicked",{(_this select 1) call bis_fnc_showCuratorAttributes;}];
 	_curatorModule addeventhandler ["curatorWaypointDoubleClicked",{(_this select 1) call bis_fnc_showCuratorAttributes;}];
 	_curatorModule addeventhandler ["curatorMarkerDoubleClicked",{(_this select 1) call bis_fnc_showCuratorAttributes;}];
+	_curatorModule addeventhandler ["curatorFeedbackMessage",{_this call bis_fnc_showCuratorFeedbackMessage;}];
+	_curatorModule addeventhandler ["curatorPinged",{_this call bis_fnc_curatorPinged;}];
+	_curatorModule addeventhandler ["curatorObjectPlaced",{_this call bis_fnc_curatorObjectPlaced;}];
+	_curatorModule addeventhandler ["curatorObjectEdited",{_this call bis_fnc_curatorObjectEdited;}];
+	_curatorModule addeventhandler ["curatorWaypointPlaced",{_this call bis_fnc_curatorWaypointPlaced;}];
+
 
 	//Loop to add all objects to the curator module
 	[_curatorModule, _player] spawn {
@@ -43,7 +49,7 @@ if ((getAssignedCuratorLogic _player) isEqualTo objNull) then {
 		while {alive _player} do {
 			sleep 10;
 			{
-				_player addCuratorEditableObjects [[_x],true];
+				_player addCuratorEditableObjects [[_x], true];
 			} forEach entities [[], ["Logic"], true];
 		};
 	};
